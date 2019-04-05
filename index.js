@@ -1,18 +1,17 @@
 const express = require('express');
 const helmet = require('helmet');
 
-// const zoosRouter = require('./zoos/zoos-router.js');
+const projectsRouter = require('./routers/projects-router.js');
+// const studentsRouter = require('./routers/students-router.js');
 
 const server = express();
 
-server.use(express.json());
 server.use(helmet());
+server.use(express.json());
 
-// endpoints here
+server.use('/api/projects', projectsRouter);
 
-// server.use('/api/zoos', zoosRouter);
-
-const port = 5000;
-server.listen(port, function() {
-  console.log(`\n=== Web API Listening on http://localhost:${port} ===\n`);
-});
+const port = process.env.PORT || 5000;
+server.listen(port, () =>
+  console.log(`\n** API running on http://localhost:${port} **\n`)
+);
